@@ -71,12 +71,12 @@ def print_processing_time(begintime, printmessage):
             minutes) + " minutes and " + str(seconds) + " seconds"
     return finalprintmessage
 
-# # Download i.sentinel if not yet installed
-# if "i.sentinel" not in grass.parse_command('g.extension', flags='a'):
-#     grass.run_command('g.extension', extension='i.sentinel')
-#     print 'i.sentinel have been installed on your computer'
-# else:
-#     print 'i.sentinel is already installed on your computer'
+# Download i.sentinel if not yet installed
+if "i.sentinel" not in grass.parse_command('g.extension', flags='a'):
+    grass.run_command('g.extension', extension='i.sentinel')
+    print 'i.sentinel have been installed on your computer'
+else:
+    print 'i.sentinel is already installed on your computer'
 
 # Defining global variables
 folder = 'F:\\snap\\sentinel'
@@ -90,7 +90,9 @@ date_end = raw_input("Please enter the end date under the following form : year-
 begintime_importingdata = time.time()
 print ("Importing sentinel data at " + time.ctime())
 
-grass.run_command('i.sentinel.download', flags='l', overwrite=True, settings='F:\\snap\\user.txt', output='F:\\snap\\sentinel', map='region_uspo@uspo', clouds=choice, start=date_begin, end=date_end, limit=3)
+grass.run_command('i.sentinel.download', flags='l', overwrite=True, settings='F:\\snap\\user.txt', 
+                  output='F:\\snap\\sentinel', map='region_uspo@uspo', clouds=choice, start=date_begin, 
+                  end=date_end, limit=3)
 
 print("Data downloading at " + time.ctime())
 print_processing_time(begintime_importingdata, "Data download achieved in ")
